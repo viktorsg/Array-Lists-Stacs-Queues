@@ -1,0 +1,59 @@
+#Categorize Numbers
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CategorizeNumbers
+{
+    class CategorizeNumb
+    {
+        static void Main(string[] args)
+        {
+            string Numbers = Console.ReadLine();
+            string[] numbs = Numbers.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);
+            double[] sort = new double[numbs.Length];
+            List<double> doubles = new List<double>();
+            List<int> ints = new List<int>();
+            for (int i = 0; i <= numbs.Length - 1; i++)
+            {
+                sort[i] = Convert.ToDouble(numbs[i]);
+            }
+            for (int j = 0; j <= numbs.Length - 1; j++)
+            {
+                if (sort[j] > Convert.ToInt32(sort[j]))
+                {
+                    doubles.Add(sort[j]);
+                }
+                else
+                    ints.Add(Convert.ToInt32(sort[j]));
+            
+            }
+            double minDoubles = doubles.Min();
+            double maxDoubles = doubles.Max();
+            double sumDoubles = doubles.Sum();
+            double avgDoubles = doubles.Average();
+            int minInts = ints.Min();
+            int maxInts = ints.Max();
+            int sumInts = ints.Sum();
+            double avgInts = ints.Average();
+            Console.Write("\n[ ");
+            foreach (double m in doubles)
+            {
+                Console.Write(m + " ");
+            }
+            Console.Write("]");
+            Console.WriteLine("-> " + "min: " + minDoubles + " max: " + maxDoubles + " sum: " + sumDoubles + " avg: " + "{0:F2}", avgDoubles);
+            Console.WriteLine();
+            Console.Write("[ ");
+            foreach (int p in ints)
+            {
+                Console.Write(p + " ");
+            }
+            Console.Write(" ]");
+            Console.WriteLine("-> " + "min: " + minInts + " max: " + maxInts + " sum: " + sumInts + " avg: " + "{0:F2}", avgInts);
+            Console.WriteLine();
+        }
+    }
+}
