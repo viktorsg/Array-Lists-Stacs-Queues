@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+class LegoBlocks
+{
+    static void Main()
+    {
+        int n = int.Parse(Console.ReadLine());
+        string[][] first = new string[n][];
+        string[][] second = new string[n][];
+        for (int i = 0; i < n; i++)
+        {
+            string firstRaw = Console.ReadLine().Trim();
+            first[i] = firstRaw.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries).ToArray().ToArray();
+        }
+        for (int i = 0; i < n; i++)
+        {
+            string secondRaw = Console.ReadLine().Trim();
+            second[i] = secondRaw.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries).ToArray().ToArray();
+            Array.Reverse(second[i]);
+        }
+        bool fit = true;
+        int legoRowLength = first[0].Length + second[0].Length;
+        int blocks = legoRowLength;
+        for (int i = 1; i < n; i++)
+        {
+            int leftSide = first[i].Length;
+            int rightSide = second[i].Length;
+            blocks += leftSide + rightSide;
+            if (first[i].Length + second[i].Length != legoRowLength)
+            {
+                fit = false;
+            }
+        }
+        if (fit)
+        {
+            string[][] Combined = new string[n][];
+            for (int i = 0; i < n; i++)
+            {
+                Combined[i] = first[i].Concat(second[i]).ToArray();
+            }
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("[");
+                Console.Write(string.Join(", ", Combined[i]));
+                Console.Write("]");
+                Console.WriteLine();
+            }
+        }
+        else
+        {
+            Console.WriteLine("The total number of cells is: " + blocks);
+        }
+    }
+}
