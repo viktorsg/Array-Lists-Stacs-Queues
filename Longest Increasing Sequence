@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EqualStrings
+{
+    class EqualStrings
+    {
+        static void Main(string[] args)
+        {
+            string read = Console.ReadLine();
+            string[] separated = read.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries);
+            List<int> list = new List<int>();
+            List<int> longestSequnce = new List<int>();
+            Console.Write(separated[0]);
+            for (int i = 1; i < separated.Length; i++)
+            {
+                if (Convert.ToInt32(separated[i - 1]) < Convert.ToInt32(separated[i]))
+                {
+                    if (i == 1)
+                    {
+                        list.Add(Convert.ToInt32(separated[0]));
+                    }
+                    if (Convert.ToInt32(separated[i - 1]) < 0)
+                    {
+                        list.Add(Convert.ToInt32(separated[i - 1]));
+                    }
+                    Console.Write(" " + separated[i]);
+                    list.Add(Convert.ToInt32(separated[i]));
+                }                
+                else if (Convert.ToInt32(separated[i - 1]) == Convert.ToInt32(separated[i]))
+                {
+                    Console.Write("\n" + separated[i]);
+                }
+                else
+                {
+                    if (longestSequnce.Count() < list.Count())
+                    {
+                        longestSequnce.AddRange(list);
+                        list.Clear();
+                    }
+                    else
+                    {
+                        list.Clear();
+                    }
+                    Console.WriteLine();
+                    Console.Write(separated[i]);
+                }
+            }
+            Console.Write("\nLongest:");
+            if (!longestSequnce.Any())
+            {
+                foreach (int n in list)
+                {
+                    Console.Write(n + " ");
+                }
+            }
+            else
+            {
+                foreach (int m in longestSequnce)
+                {
+                    Console.Write(m + " ");
+                }
+            }
+            Console.WriteLine();
+        }
+    }
+}
