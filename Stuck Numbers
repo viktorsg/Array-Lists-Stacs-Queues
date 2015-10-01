@@ -1,0 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace StuckNumbers
+{
+    class StuckNumbers
+    {
+        static void Main(string[] args)
+        {
+            int n = int.Parse(Console.ReadLine());
+            string input = Console.ReadLine();
+            List<int> numbers = input.Split(' ').Select(int.Parse).ToList();
+            bool areEqual = false;
+            foreach (int a in numbers)
+            {
+                foreach (int b in numbers)
+                {
+                    foreach (int c in numbers)
+                    {
+                        foreach (int d in numbers)
+                        {
+                            if (a != b && a != c && a != d && b != c && b != d && c != d)
+                            {
+                                string first = a.ToString() + b.ToString();
+                                string second = c.ToString() + d.ToString();
+                                if (first.Equals(second))
+                                {
+                                    areEqual = true;
+                                    Console.WriteLine("{0}|{1} == {2}|{3}", a, b, c, d);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (!areEqual)
+            {
+                Console.WriteLine("No");
+            }
+        }
+    }
+}
